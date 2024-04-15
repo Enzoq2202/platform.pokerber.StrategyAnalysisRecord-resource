@@ -1,0 +1,12 @@
+insper/store/tournamentmanager/TournamentManagerApplication.class
+insper/store/tournamentmanager/Player$PlayerBuilder.class
+insper/store/tournamentmanager/Player.class
+insper/store/tournamentmanager/Tournament.class
+insper/store/tournamentmanager/TournamentManagerClient.class
+insper/store/tournamentmanager/TournamentManagerModel$TournamentManagerModelBuilder.class
+insper/store/tournamentmanager/TournamentManagerParser.class
+insper/store/tournamentmanager/Tournament$TournamentBuilder.class
+insper/store/tournamentmanager/TournamentManagerService.class
+insper/store/tournamentmanager/TournamentManagerModel.class
+insper/store/tournamentmanager/TournamentManagerResource.class
+insper/store/tournamentmanager/TournamentManagerRepository.class
