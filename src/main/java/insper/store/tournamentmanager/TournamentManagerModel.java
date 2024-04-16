@@ -1,23 +1,20 @@
 package insper.store.tournamentmanager;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import java.time.LocalDateTime;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tournaments")
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Accessors(chain = true, fluent = true)
 public class TournamentManagerModel {
 
@@ -36,17 +33,16 @@ public class TournamentManagerModel {
     @Column(name = "description")
     private String description;
 
-    // Se você decidir adicionar jogadores diretamente ao torneio,
-    // você pode adicionar um campo como este:
-    // @OneToMany(mappedBy = "tournament")
-    // private Set<PlayerModel> players;
+    @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<Player> players = new HashSet<>();
 
-    // Aproveitando a funcionalidade do Lombok para criar o Builder
-    @Builder
-    public TournamentManagerModel(String id, String name, LocalDateTime startTime, String description) {
-        this.id = id;
-        this.name = name;
-        this.startTime = startTime;
-        this.description = description;
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayer(Player player) {
+        this.players.add(player);
+        player.setTournament(this);
     }
 }

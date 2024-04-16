@@ -62,17 +62,21 @@ public class TournamentManagerService {
     }
 
     @Transactional
-    public boolean addPlayerToTournament(String tournamentId, String playerId) {
+    public boolean addPlayerToTournament(String tournamentId, String playerId, String playerName) {
         Optional<TournamentManagerModel> tournamentOpt = tournamentRepository.findById(tournamentId);
-        if (tournamentOpt.isPresent()) {
+        if (tournamentOpt.isPresent() && checkPlayerExists(playerId)) {
             TournamentManagerModel tournament = tournamentOpt.get();
-            // Adicione o jogador ao torneio, assumindo que você tem uma coleção de IDs de jogadores ou entidades
-            // tournament.addPlayer(playerId); ou algo similar
-            tournamentRepository.save(tournament);
+            Player player = new Player(); // Crie a instância do jogador
+            player.setId(playerId); // Configure o ID
+            player.setName(playerName); // Garanta que o nome está sendo configurado
+            player.setTournament(tournament); // Associe o torneio
+            tournament.getPlayers().add(player); // Adicione ao conjunto de jogadores
+            tournamentRepository.save(tournament); // Salve as alterações
             return true;
         }
         return false;
     }
+
 
 
     // Verificar se um jogador existe

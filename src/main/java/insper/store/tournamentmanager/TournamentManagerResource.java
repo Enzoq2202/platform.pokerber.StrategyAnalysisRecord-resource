@@ -72,8 +72,8 @@ public class TournamentManagerResource {
         if (!tournamentService.checkPlayerExists(playerIn.playerId())) {
             return ResponseEntity.badRequest().build();  // ou outra resposta apropriada
         }
-        
-        boolean added = tournamentService.addPlayerToTournament(tournamentId, playerIn.playerId());
+
+        boolean added = tournamentService.addPlayerToTournament(tournamentId, playerIn.playerId(), playerIn.playerName());
         if (!added) {
             return ResponseEntity.notFound().build();
         }

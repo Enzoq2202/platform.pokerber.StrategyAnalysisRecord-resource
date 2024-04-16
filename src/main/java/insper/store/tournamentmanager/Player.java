@@ -12,14 +12,13 @@ public class Player {
 
     @Id
     @Column(name = "player_id", nullable = false)
-    private String id;  // ID do jogador gerenciado externamente
+    private String id;
 
     @Column(name = "player_name", nullable = false)
-    private String name;  // Nome do jogador
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament_id")
-    private Tournament tournament;  // Torneio associado ao jogador
-
-    
+    private TournamentManagerModel tournament;  // Usando TournamentManagerModel consistentemente
 }
+
